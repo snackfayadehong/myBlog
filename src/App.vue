@@ -6,12 +6,10 @@
 import navigation from "./components/navigation/Navigation.vue";
 export default {
   name: "App",
-  components:{
-    navigation
-  }
-}
+  components: {
+    navigation,
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
