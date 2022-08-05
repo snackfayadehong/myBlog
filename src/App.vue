@@ -1,14 +1,23 @@
 <template>
-  <navigation></navigation>
+  <div class="ea-blog">
+    <div class="left-container">
+      <side-bar></side-bar>
+    </div>
+    <div class="main-container">
+      <home></home>
+    </div>
+  </div>
 </template>
 
 <script>
-import navigation from "./components/navigation/Navigation.vue";
+import sideBar from "./components/SideBar/SideBar.vue";
+import home from "./components/Home/Home.vue";
 export default {
   name: "App",
   components: {
-    navigation,
-  },
+    sideBar,
+    home
+  }
 };
 </script>
 

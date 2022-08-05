@@ -3,9 +3,8 @@ import { createApp } from "vue";
 //导入ElementPlus
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
-import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 
-import "./style.css";
+import "./style.less";
 
 import App from "./App.vue";
 
