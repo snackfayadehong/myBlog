@@ -1,22 +1,13 @@
 <template>
-  <div class="ea-blog">
-    <div class="left-container">
-      <side-bar></side-bar>
-    </div>
-    <div class="main-container">
-      <home></home>
-    </div>
-  </div>
+  <navigation-bar-top></navigation-bar-top>
 </template>
 
 <script>
-import sideBar from "./components/SideBar/SideBar.vue";
-import home from "./components/Home/Home.vue";
+import NavigationBarTop from "./components/NavigationBarTop/NavigationBarTop.vue";
 export default {
   name: "App",
   components: {
-    sideBar,
-    home
+    NavigationBarTop
   }
 };
 </script>

@@ -18,4 +18,4 @@
 - https://www.mrcore.cn
 #### 组件
 - SideBar 左侧信息
-- HomeTop 主体顶部导航
+- NavigationBarTop 主体顶部导航
