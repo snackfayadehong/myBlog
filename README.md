@@ -16,6 +16,7 @@
 - https://shen-yu.gitee.io
 - https://kyori.xyz
 - https://www.mrcore.cn
+- https://www.upkiry.com/
 #### 组件
 - SideBar 左侧信息
 - NavigationBarTop 主体顶部导航

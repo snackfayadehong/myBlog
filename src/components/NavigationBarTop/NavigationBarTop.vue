@@ -18,7 +18,7 @@ import { ref } from "vue";
 const activeIndex = ref("1");
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .flex-grow {
   flex-grow: 1;
 }
@@ -37,6 +37,7 @@ const activeIndex = ref("1");
   width: 1200px;
   height: 80px;
 }
+
 // menu取消默认样式和过渡
 .el-menu-item {
   transition: none;
@@ -46,8 +47,20 @@ const activeIndex = ref("1");
 }
 .el-menu--horizontal {
   border-bottom: none;
+  .el-menu-item{
+    border-bottom: none;
+  }
   .el-menu-item:not(.is-disabled):focus {
     background-color: white;
+  }
+  .el-menu-item.is-active:nth-child(1){
+    color: #303133 !important;
+  }
+  .el-menu-item:not(.is-disabled):nth-child(1):focus{
+    color: #303133 !important;
+  }
+  .el-menu-item:not(.is-disabled):nth-child(1):hover{
+    color: #303133 !important;
   }
   .el-menu-item:not(.is-disabled):hover {
     background-color: white;
