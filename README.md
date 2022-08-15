@@ -18,5 +18,7 @@
 - https://www.mrcore.cn
 - https://www.upkiry.com/
 #### 组件
-- SideBar 左侧信息
+- ~~SideBar 左侧信息(可能废弃)~~
+- Cover 封面,封面nav
 - NavigationBarTop 主体顶部导航
+- Scoll-down 向下滑动组件

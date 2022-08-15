@@ -7,14 +7,19 @@
       <cover-nav class="cover-nav"></cover-nav>
     </div>
   </div>
+  <div class="cover-footer">
+    <scroll-down></scroll-down>
+  </div>
 </template>
 
 <script>
 import CoverNav from './CoverNav.vue'
+import ScrollDown from '../ScrollDown/ScrollDown.vue'
 export default {
   name: "Cover",
   components:{
-    CoverNav
+    CoverNav,
+    ScrollDown
   }
 };
 </script>
@@ -50,7 +55,12 @@ export default {
 
   }
 }
+.cover-footer{
+  position:fixed;
 
-
-
+  left:0;
+  right:0;
+  top: 90%;
+  text-align: center;
+}
 </style>
