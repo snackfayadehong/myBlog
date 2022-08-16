@@ -20,5 +20,8 @@
 #### 组件
 - ~~SideBar 左侧信息(可能废弃)~~
 - Cover 封面,封面nav
+- Article 文章信息
+- SiteInformation 站点信息
 - NavigationBarTop 主体顶部导航
-- Scoll-down 向下滑动组件
+- Scroll-down 向下滑动组件
+- Footer 页脚
