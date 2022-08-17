@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-container">
+  <div class="nav-container" v-if="showNavTop">
     <div class="navTop">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false">
         <el-menu-item index="0">Ea's Blog</el-menu-item>
@@ -16,6 +16,7 @@
 <script setup>
 import { ref } from "vue";
 const activeIndex = ref("1");
+const showNavTop = ref(false); // 展示顶部导航栏
 </script>
 
 <style lang="less" scoped>
@@ -23,19 +24,17 @@ const activeIndex = ref("1");
   flex-grow: 1;
 }
 .nav-container {
-  width: 100%;
   height: 80px;
   position: fixed;
   top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border-radius: 0 0 10px 10px;
   box-shadow: 0 0 10px #0000001a;
+  z-index: 9999;
 }
 .navTop .el-menu-demo {
   width: 1200px;
   height: 80px;
+  border-radius: 0 0 10px 10px ;
 }
 
 // menu取消默认样式和过渡

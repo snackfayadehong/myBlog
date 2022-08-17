@@ -1,11 +1,18 @@
 <template>
- <div class="scroll-container">
+ <div class="scroll-container" @click="goToMain" id="goto" >
    <el-icon class="scroll-down"><ArrowDownBold /></el-icon>
  </div>
 </template>
 
 <script setup>
 import {ArrowDownBold} from '@element-plus/icons'
+
+// 向下滚动方法
+const goToMain = ()=>{
+  //获取元素后通过scrollIntoView指定滚动方式
+  document.getElementById("goto").scrollIntoView({behavior:'smooth'})
+  console.log(document.documentElement.scrollTop);
+}
 </script>
 
 <style lang="less" scoped>
@@ -31,6 +38,7 @@ import {ArrowDownBold} from '@element-plus/icons'
     height: 60px;
     font-size: 30px;
     width: 30px;
+    cursor: pointer;
   }
 }
 </style>

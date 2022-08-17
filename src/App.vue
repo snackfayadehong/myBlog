@@ -8,6 +8,7 @@
     </div>
     <div class="main">
       <div class="main-container container">
+        <NavigationBarTop></NavigationBarTop>
         <Article></Article>
         <site-information></site-information>
       </div>
