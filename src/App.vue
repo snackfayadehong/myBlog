@@ -15,6 +15,9 @@
     <div class="blog-footer">
       <Footer></Footer>
     </div>
+    <div class="goToTop">
+      <BackToTop></BackToTop>
+    </div>
   </div>
 </template>
 
@@ -24,6 +27,7 @@ import Cover from "./components/Cover/Cover.vue";
 import Article from "./components/Article/Article.vue";
 import SiteInformation from "./components/SiteInformation/SiteInformation.vue";
 import Footer from "./components/Footer/Footer.vue";
+import BackToTop from "./components/BackToTop/BackToTop.vue";
 export default {
   name: "App",
   components: {
@@ -31,13 +35,14 @@ export default {
     Cover,
     Article,
     SiteInformation,
-    Footer
+    Footer,
+    BackToTop
   },
   data(){
     return{
       showNav:true
     }
-  }
+  },
 };
 </script>
 

@@ -50,6 +50,7 @@ export default {
   margin-left: -30px;
   .information-card {
     margin-bottom: 20px;
+    border-radius: 10px;
   }
 }
 </style>
