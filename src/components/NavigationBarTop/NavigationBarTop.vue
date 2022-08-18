@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-container" v-if="showNavTop">
+  <div class="nav-container" v-show="showNavTop">
     <div class="navTop">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false">
         <el-menu-item index="0">Ea's Blog</el-menu-item>
@@ -14,9 +14,18 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 const activeIndex = ref("1");
-const showNavTop = ref(false); // 展示顶部导航栏
+// const showNavTop = ref(false); // 展示顶部导航栏
+
+//props
+const props = defineProps(["scrollTopValue"]);
+
+//computed
+const showNavTop = computed(() => {
+  return props.scrollTopValue >= 800;
+});
+//methods
 </script>
 
 <style lang="less" scoped>
@@ -34,7 +43,7 @@ const showNavTop = ref(false); // 展示顶部导航栏
 .navTop .el-menu-demo {
   width: 1200px;
   height: 80px;
-  border-radius: 0 0 10px 10px ;
+  border-radius: 0 0 10px 10px;
 }
 
 // menu取消默认样式和过渡
@@ -46,19 +55,19 @@ const showNavTop = ref(false); // 展示顶部导航栏
 }
 .el-menu--horizontal {
   border-bottom: none;
-  .el-menu-item{
+  .el-menu-item {
     border-bottom: none;
   }
   .el-menu-item:not(.is-disabled):focus {
     background-color: white;
   }
-  .el-menu-item.is-active:nth-child(1){
+  .el-menu-item.is-active:nth-child(1) {
     color: #303133 !important;
   }
-  .el-menu-item:not(.is-disabled):nth-child(1):focus{
+  .el-menu-item:not(.is-disabled):nth-child(1):focus {
     color: #303133 !important;
   }
-  .el-menu-item:not(.is-disabled):nth-child(1):hover{
+  .el-menu-item:not(.is-disabled):nth-child(1):hover {
     color: #303133 !important;
   }
   .el-menu-item:not(.is-disabled):hover {
