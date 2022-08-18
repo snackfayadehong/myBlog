@@ -6,12 +6,14 @@
 
 <script>
 export default {
-  name: "Footer"
+  name: "Footer",
 };
 </script>
 
+<script setup></script>
+
 <style lang="less" scoped>
-.footer-container{
+.footer-container {
   height: 100%;
   line-height: 100px;
 }

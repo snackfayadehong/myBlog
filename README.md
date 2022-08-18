@@ -24,4 +24,5 @@
 - SiteInformation 站点信息
 - NavigationBarTop 主体顶部导航
 - Scroll-down 向下滑动组件
+- BackToTop 向上滑动组件
 - Footer 页脚
