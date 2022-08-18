@@ -3,11 +3,11 @@
     <el-card class="box-card" v-for="item in 5" :key="item" shadow="hover">
       <template #header>
         <div class="card-header">
-          <span>Card name</span>
-          <el-button class="button" text>Operation button</el-button>
+          <span>目前没有内容</span>
+          <el-button class="button" text>阅读全文</el-button>
         </div>
       </template>
-      <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
+      <div v-for="o in 4" :key="o" class="text item">{{ "List item " + o }}</div>
     </el-card>
   </div>
 </template>
@@ -42,7 +42,7 @@ export default {
   opacity: 0.98;
   backdrop-filter: blur(20px);
 }
-.article-container{
+.article-container {
   position: relative;
 }
 </style>

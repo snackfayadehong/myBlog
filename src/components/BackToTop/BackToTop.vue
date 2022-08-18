@@ -1,5 +1,4 @@
 <template>
-  <!--  可通过transition控制v-if过渡   -->
   <button class="btn" @click="backTop"></button>
 </template>
 
@@ -41,7 +40,7 @@ const backTop = () => {
   }
   40% {
     transform: translateY(-30px);
-    opacity: 0.5;
+    opacity: 1;
   }
   60% {
     transform: translateY(-15px);
