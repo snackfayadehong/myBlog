@@ -1,5 +1,6 @@
 <template>
   <div class="information-container">
+    <!--    个人信息卡片区域   -->
     <div class="card">
       <div class="picture">
         <img src="/src/assets/headPicture.png" alt="" />
@@ -12,7 +13,9 @@
       </div>
       <div class="buttons">
         <div class="button1">
-          <button>占位字</button>
+          <button>
+            <img src="/src/assets/email.png" alt="" />
+          </button>
         </div>
         <div class="button2">
           <button>
@@ -21,14 +24,30 @@
         </div>
       </div>
     </div>
-
-    <el-card :body-style="{ padding: '0px' }" v-for="item in 2" :key="item" class="information-card">
+    <!--    站点信息卡片区域   -->
+    <el-card :body-style="{ padding: '0px' }" class="information-card">
       <!--      其它标签在此填充   -->
       <div style="padding: 14px">
-        <span>站点信息</span>
+        <span class="el-card-span">
+          <el-icon><LocationInformation /></el-icon>
+          <span>站点信息</span>
+        </span>
+        <div class="title">
+          <div class="Access">
+            <span>访客数:</span>
+            <span>1000&nbsp;人</span>
+          </div>
+          <div class="traffic">
+            <span>访问量:</span>
+            <span>10000&nbsp;次</span>
+          </div>
+          <div class="runtime">
+            <span>运行时间:</span>
+            <span>1000&nbsp;天</span>
+          </div>
+        </div>
         <div class="bottom">
           <time class="time">2022</time>
-          <el-button text class="button">Operating</el-button>
         </div>
       </div>
     </el-card>
@@ -40,7 +59,9 @@ export default {
   name: "SiteInformation",
 };
 </script>
-<script setup></script>
+<script setup>
+import { LocationInformation } from "@element-plus/icons";
+</script>
 
 <style lang="less" scoped>
 .time {
@@ -69,6 +90,22 @@ export default {
   .information-card {
     margin-top: 20px;
     border-radius: 10px;
+  }
+}
+.el-card-span {
+  display: flex;
+  align-items: center;
+  > span {
+    padding-left: 5px;
+  }
+}
+.title {
+  margin-top: 20px;
+  font-size: 12px;
+  > div {
+    margin-top: 7px;
+    display: flex;
+    justify-content: space-between;
   }
 }
 </style>
@@ -105,6 +142,7 @@ export default {
   > img {
     height: 100%;
     transform: scale(1.2, 1.2);
+    transition: all 0.7s;
   }
   > img:hover {
     transition: all 0.7s;
@@ -113,7 +151,7 @@ export default {
 }
 
 .buttons > div {
-  padding: 0.5em;
+  padding: 1em;
 }
 
 .card button {
@@ -128,11 +166,11 @@ export default {
   z-index: 1;
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
   display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
   > img {
-    width: 90%;
-    height: 90%;
+    width: 70%;
+    height: 70%;
   }
 }
 //.card button img:hover {

@@ -26,3 +26,7 @@
 - Scroll-down 向下滑动组件
 - BackToTop 向上滑动组件
 - Footer 页脚
+
+#### 依赖库
+- Axios
+- NeteaseCloudMusicApi

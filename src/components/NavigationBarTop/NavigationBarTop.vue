@@ -2,12 +2,13 @@
   <div class="nav-container" v-show="showNavTop">
     <div class="navTop">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false">
-        <el-menu-item index="0">Ea's Blog</el-menu-item>
+        <el-menu-item index="0">Ea</el-menu-item>
         <div class="flex-grow" />
         <el-menu-item index="1">首页</el-menu-item>
         <el-menu-item index="2">文章</el-menu-item>
-        <el-menu-item index="3">友链</el-menu-item>
-        <el-menu-item index="4">关于</el-menu-item>
+        <el-menu-item index="3">终端</el-menu-item>
+        <el-menu-item index="4">友链</el-menu-item>
+        <el-menu-item index="5">关于</el-menu-item>
       </el-menu>
     </div>
   </div>
@@ -49,6 +50,7 @@ const showNavTop = computed(() => {
 // menu取消默认样式和过渡
 .el-menu-item {
   transition: none;
+  border-radius: 10px;
 }
 .el-menu-item.is-active {
   color: white;
