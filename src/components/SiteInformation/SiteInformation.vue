@@ -12,7 +12,7 @@
       </div>
       <div class="buttons">
         <div class="button1">
-          <button>Button 1</button>
+          <button>占位</button>
         </div>
         <div class="button2">
           <button>
