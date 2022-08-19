@@ -15,10 +15,13 @@
           <button>Button 1</button>
         </div>
         <div class="button2">
-          <button>Button 2</button>
+          <button>
+            <img src="/src/assets/github.png" alt="github" title="github" />
+          </button>
         </div>
       </div>
     </div>
+
     <el-card :body-style="{ padding: '0px' }" v-for="item in 2" :key="item" class="information-card">
       <!--      其它标签在此填充   -->
       <div style="padding: 14px">
@@ -103,25 +106,57 @@ export default {
     height: 100%;
     transform: scale(1.2, 1.2);
   }
+  > img:hover {
+    transition: all 0.7s;
+    transform: scale(1.8, 1.8);
+  }
 }
 
 .buttons > div {
   padding: 0.5em;
 }
 
-button {
-  padding: 0.5em;
+.card button {
+  width: 3em;
+  height: 3em;
   outline: none;
-  background: transparent;
-  border: 1px solid #0f0f0f6b;
-  border-radius: 0.4em;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: none;
+  position: relative;
+  border-radius: 100%;
+  overflow: hidden;
   transition: all 0.3s;
-  font-size: 0.7em;
+  z-index: 1;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  > img {
+    width: 90%;
+    height: 90%;
+  }
+}
+//.card button img:hover {
+//  transition: all 0.5s;
+//  transform: scale(1.2, 1.2);
+//}
+.card button::before {
+  content: "";
+  width: 0;
+  height: 3em;
+  border-radius: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+  transition: 0.5s ease;
+  display: block;
+  z-index: -1;
+}
+.card button:hover::before {
+  width: 3em;
 }
 
-.card .picture:hover,
-button:hover {
+.card .picture:hover {
   background: #252525;
   color: #f1f5f3;
 }
@@ -132,7 +167,7 @@ button:hover {
   font-size: 1em;
 }
 
-.card .jobtitle p {
+.card .jobTitle p {
   margin-bottom: 10%;
   font-size: 0.54em;
   text-transform: uppercase;

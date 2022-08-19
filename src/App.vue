@@ -67,7 +67,7 @@ const scrollTopHandler = (e) => {
     const timer = setInterval(() => {
       document.documentElement.scrollTop -= 50;
       if (document.documentElement.scrollTop === 0) {
-        clearInterval(timer); //清楚定时器
+        clearInterval(timer); //清除定时器
       }
     }, 5);
   }
