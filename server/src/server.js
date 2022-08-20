@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const expressSession = require("express-session");
 const http = require("http");
+const MyError = require("./exception");
+const { BAN_ERROR_CODE } = require("./exception/errorCode");
 
 // 请求大小限制
 const requestLimit = "5120kb";
@@ -45,7 +47,49 @@ class ExpressServer {
     const handler = async (req, res) => {
       //  IP过滤
       const requestRealIp = getRealIp(req);
+      if (!requestRealIp) {
+        return BAN_ERROR_CODE;
+      }
+      const event = req.body;
+      let result;
+      try {
+        const startTime = new Date().getTime();
+        let params;
+        if (event.file) {
+          let eventCopy = { ...event };
+          eventCopy.file = undefined;
+          params = JSON.stringify(eventCopy);
+        } else {
+          params = JSON.stringify(event);
+        }
+        console.log(`req start path = ${req.path}, clientIp = ${requestRealIp}, params = ${params}`);
+        result = await handlerFunction(event, req, res);
+        //  响应封装
+        result = {
+          code: 0,
+          data: result
+        };
+        console.log(`req end path = ${req.path}, clientIp = ${requestRealIp}, params = ${params}, costTime = ${new Date().getTime() - startTime}`);
+      } catch (e) {
+        //  全局异常处理
+        if (e instanceof MyError) {
+          result = {
+            code: e.code,
+            message: e.message,
+            data: null
+          };
+        } else {
+          result = {
+            code: 500,
+            data: null,
+            message: "server error"
+          };
+        }
+        console.error(`req error path = ${req.path}, clientIp = ${requestRealIp}, params = ${JSON.stringify(event)}`, e);
+      }
+      res.send(result);
     };
+    this.app.post(this.contextPath + path, handler);
   }
 
   //  监听
