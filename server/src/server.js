@@ -41,6 +41,13 @@ class ExpressServer {
     this.server = http.createServer(this.app);
   }
 
+  setRoute(path, handlerFunction) {
+    const handler = async (req, res) => {
+      //  IP过滤
+      const requestRealIp = getRealIp(req);
+    };
+  }
+
   //  监听
   listen(port) {
     this.server.listen(port);
