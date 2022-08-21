@@ -7,22 +7,22 @@ const { cloudsearch, song_url } = require("NeteaseCloudMusicApi");
  * @author fayadehong
  */
 // 获取音乐
-async function searchMusic(keywords, limit = 3) {
+async function searchMusic(keywords, limit = 1) {
   if (!keywords) return [];
-}
-try {
-  const result = await cloudsearch({
-    keywords: "日落大道 梁博",
-    type: 1,
-    limit: 10
-  });
-  if (result.status !== 200) {
-    return [];
-  } else {
-    return result.body.result.songs.id;
+  try {
+    const music = await cloudsearch({
+      keywords,
+      type: 1,
+      limit: 1
+    });
+    if (music.status !== 200) {
+      return [];
+    } else {
+      return music.body.result;
+    }
+  } catch (error) {
+    console.log(error);
   }
-} catch (error) {
-  console.log(error);
 }
 
 //获取音乐url
@@ -36,7 +36,7 @@ async function getMusicUrl(id, br = 999000) {
     if (musicUrl.status !== 200) {
       return "";
     } else {
-      return musicUrl.url;
+      return musicUrl.body.data[0];
     }
   } catch (error) {
     console.log(error);
@@ -62,7 +62,7 @@ async function main() {
   }
 }
 main().then(r => {
-  console.log(r.body.result.songs);
+  console.log(r.body.result.songs[0].id);
 });*/
 
 /*
