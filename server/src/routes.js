@@ -5,6 +5,9 @@
 
 const routes = [
   {
-    path: "/test/"
+    path: "/test",
+    handler: require("./service/getMusic").randomMusic()
   }
 ];
+
+module.exports = routes;
