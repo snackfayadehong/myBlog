@@ -1,25 +1,29 @@
 const { searchMusic, getMusicUrl } = require("../thirdParty/musicsApi");
-const { sample } = require("lodash");
-
-/**
- *
- * @type {string[]}
- * @author fayadehong
- */
+const MyError = require("../exception");
+const { NOT_FOUND_ERROR_CODE, REQUEST_PARAMS_ERROR_CODE } = require("../exception/errorCode");
 
 // 获取音乐URl方法
-const musics = ["日落大道 梁博", "shots", "17岁 刘德华", "县城 刘森"]; // 音乐数组
 let id = 0; //音乐id
-async function randomMusic() {
-  let music = sample(musics); // 随机返回一个数组元素
+/**
+ *
+ * @param event
+ * @param req
+ * @param res
+ * @returns {Promise<{Status, author, name, url}>}
+ */
+async function randomMusic(event, req, res) {
+  const { music } = event;
+  if (!music) {
+    throw new MyError(REQUEST_PARAMS_ERROR_CODE, "未提供音乐名");
+  }
   const { songs: musicID } = await searchMusic(music); // 获取音乐ID
   if (musicID.length < 1) {
-    return null;
+    throw new MyError(NOT_FOUND_ERROR_CODE);
   } else {
     id = musicID[0];
     const url = await getMusicUrl(id.id); //获取音乐地址
     return {
-      Status: url.code,
+      status: url.code,
       name: id.name,
       author: id.ar[0].name,
       url: url.url

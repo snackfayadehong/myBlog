@@ -5,8 +5,8 @@
 
 const routes = [
   {
-    path: "/test",
-    handler: require("./service/getMusic").randomMusic()
+    path: "/music/get",
+    handler: require("./service/getMusic").randomMusic
   }
 ];
 
