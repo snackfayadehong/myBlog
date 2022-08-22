@@ -45,8 +45,6 @@ import { ref, onMounted, onUnmounted } from "vue";
 const showNav = ref(false); // 展示顶部导航栏
 const showBackToTop = ref(false); // 展示回到顶部按钮
 const scrollTopValue = ref(0); //  页面距离顶部距离
-const p = "17岁";
-const resp = {};
 //mounted
 const listener = onMounted(() => {
   window.addEventListener("scroll", scrollTop);
