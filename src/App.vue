@@ -12,6 +12,7 @@
           <NavigationBarTop :scroll-top-value="scrollTopValue"></NavigationBarTop>
         </transition>
         <Article></Article>
+        <music-player></music-player>
         <site-information></site-information>
       </div>
     </div>
@@ -26,7 +27,7 @@
 
 <script>
 export default {
-  name: "App",
+  name: "App"
 };
 </script>
 
@@ -38,12 +39,14 @@ import Article from "./components/Article/Article.vue";
 import SiteInformation from "./components/SiteInformation/SiteInformation.vue";
 import Footer from "./components/Footer/Footer.vue";
 import BackToTop from "./components/BackToTop/BackToTop.vue";
+import MusicPlayer from "./components/Players/MusicPlayer.vue";
 import { ref, onMounted, onUnmounted } from "vue";
 
 const showNav = ref(false); // 展示顶部导航栏
 const showBackToTop = ref(false); // 展示回到顶部按钮
 const scrollTopValue = ref(0); //  页面距离顶部距离
-
+const p = "17岁";
+const resp = {};
 //mounted
 const listener = onMounted(() => {
   window.addEventListener("scroll", scrollTop);
@@ -61,7 +64,7 @@ const scrollTop = () => {
 };
 
 // 回到顶部方法
-const scrollTopHandler = (e) => {
+const scrollTopHandler = e => {
   scrollTopValue.value = e;
   if (scrollTopValue.value === 0) {
     const timer = setInterval(() => {
