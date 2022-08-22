@@ -7,5 +7,8 @@ import "element-plus/dist/index.css";
 import "./style.less";
 
 import App from "./App.vue";
+const app = createApp(App);
 
-createApp(App).use(ElementPlus).mount("#app");
+app.use(ElementPlus);
+
+app.mount("#app");
