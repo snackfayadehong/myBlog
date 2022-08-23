@@ -51,6 +51,11 @@ export default {
 </script>
 <script setup>
 import { ref, onMounted } from "vue";
+import { getMusic } from "../../api/api.js";
+
+onMounted(() => {
+  getMusic();
+});
 </script>
 
 <style lang="less" scoped>
