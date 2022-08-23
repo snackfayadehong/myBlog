@@ -19,11 +19,10 @@ class ExpressServer {
     this.app.use(bodyParser.urlencoded({ extended: false, limit: requestLimit }));
     this.app.use(bodyParser.json({ limit: requestLimit }));
     this.app.set("x-powered-by", false); //过滤此请求头
-    this.app.all("*", (req, res, next) => {
-      //  开启跨域
-      this.app.use(cors());
+    this.app.use(cors()); //允许跨域
+    this.app.all("/music", (req, res, next) => {
       //  允许跨域请求的方法
-      res.setHeader("Access-Control-Allow-Methods", "POST,GET, OPTIONS,DELETE,PUT");
+      res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE,PUT");
       next();
     });
     //  设置Express的Session存储中间件,存储用户信息
