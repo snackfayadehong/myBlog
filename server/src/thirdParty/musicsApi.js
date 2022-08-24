@@ -13,7 +13,7 @@ async function searchMusic(keywords, limit = 1) {
     const music = await cloudsearch({
       keywords,
       type: 1,
-      limit: 1
+      limit: 1,
     });
     if (music.status !== 200) {
       return [];
@@ -31,7 +31,7 @@ async function getMusicUrl(id, br = 999000) {
   try {
     const musicUrl = await song_url({
       id,
-      br
+      br,
     });
     if (musicUrl.status !== 200) {
       return "";
@@ -45,7 +45,7 @@ async function getMusicUrl(id, br = 999000) {
 
 module.exports = {
   searchMusic,
-  getMusicUrl
+  getMusicUrl,
 };
 
 /*// 测试获取音乐
