@@ -7,30 +7,29 @@ const myAxios = axios.create({
   baseURL: "http://127.0.0.1:3007/api",
   headers: { token: localStorage.getItem("token") || "" },
   timeout: 5000,
-  withCredentialsL: false //跨域请求需要凭证
+  withCredentialsL: false, //跨域请求需要凭证
 });
 
 myAxios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded;charset=UTF-8";
 
 // 请求拦截器
 myAxios.interceptors.request.use(
-  config => {
+  (config) => {
     const token = localStorage.getItem("token");
     return config;
   },
-  err => Promise.reject(err)
+  (err) => Promise.reject(err)
 );
 
 // 响应拦截器
 myAxios.interceptors.response.use(
-  res => {
-    if (res.data.code !== 200) {
+  (res) => {
+    if (res.data.code !== 0) {
       return "请求数据失败";
     }
-    console.log(res);
     return res.data;
   },
-  err => {
+  (err) => {
     if (err) {
       return Promise.reject(err);
     }
