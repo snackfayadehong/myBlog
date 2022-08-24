@@ -20,19 +20,20 @@ async function randomMusic(event, req, res) {
   if (musicID.length < 1) {
     throw new MyError(NOT_FOUND_ERROR_CODE);
   } else {
-    id = musicID[0];
-    const url = await getMusicUrl(id.id); //获取音乐地址
+    id = musicID[0].id;
+    const url = await getMusicUrl(id); //获取音乐地址
     return {
       status: url.code,
-      name: id.name,
-      author: id.ar[0].name,
-      url: url.url
+      name: musicID[0].name,
+      author: musicID[0].ar[0].name,
+      musicPic: musicID[0].al.picUrl,
+      url: url.url,
     };
   }
 }
 
 module.exports = {
-  randomMusic
+  randomMusic,
 };
 // randomMusic().then(r => {
 //   console.log(r);
