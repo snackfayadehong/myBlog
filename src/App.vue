@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
 };
 </script>
 
@@ -62,7 +62,7 @@ const scrollTop = () => {
 };
 
 // 回到顶部方法
-const scrollTopHandler = e => {
+const scrollTopHandler = (e) => {
   scrollTopValue.value = e;
   if (scrollTopValue.value === 0) {
     const timer = setInterval(() => {

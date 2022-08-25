@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "MusicPlayer"
+  name: "MusicPlayer",
 };
 </script>
 <script setup>
@@ -21,7 +21,12 @@ import { getMusic } from "../../api/api.js";
 
 const defaultPic = ref(true);
 const musicAudio = ref();
-let test = "";
+// mounted
+const lister = onMounted(() => {
+  window.addEventListener("scroll", videoPlayer);
+  window.addEventListener("click", videoPlayer);
+});
+
 // 音乐信息
 const music = ref({});
 onMounted(async () => {
@@ -32,8 +37,16 @@ onMounted(async () => {
     defaultPic.value = false;
     music.value = res;
   }
-  musicAudio.value.play(); //自动播放
 });
+// 播放音乐方法
+const videoPlayer = () => {
+  if (musicAudio.value.paused === true) {
+    musicAudio.value.play();
+  } else {
+    window.removeEventListener("scroll", videoPlayer);
+    window.removeEventListener("click", videoPlayer);
+  }
+};
 </script>
 
 <style lang="less" scoped>
