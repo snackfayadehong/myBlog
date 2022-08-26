@@ -1,6 +1,6 @@
 <template>
   <!--音乐播放器-->
-  <div class="music-container" @click="suspendMusic">
+  <div class="music-container" :style="musicAfterPic ? { '--background-image-suspend': 'url(/src/assets/play.png)' } : ''">
     <div class="music-disk">
       <!--唱片图片-->
       <img class="music-disk-picture" src="src/assets/musicPic.png" alt="" v-if="defaultPic" />
@@ -9,10 +9,10 @@
     <audio :src="music.url" class="audio-component" ref="musicAudio"></audio>
   </div>
 </template>
-
+<!--animation: musicPicRotating 5s linear infinite;-->
 <script>
 export default {
-  name: "MusicPlayer"
+  name: "MusicPlayer",
 };
 </script>
 <script setup>
@@ -20,7 +20,9 @@ import { ref, onMounted } from "vue";
 import { getMusic } from "../../api/api.js";
 
 const defaultPic = ref(true);
+const musicAfterPic = ref(false);
 const musicAudio = ref(null);
+const musicPicRota = ref(null);
 
 // mounted
 const lister = onMounted(() => {
@@ -40,16 +42,32 @@ onMounted(async () => {
 });
 // 播放音乐方法
 const videoPlayer = () => {
-  if (musicAudio.value.paused === true) {
-    musicAudio.value.play();
-  } else {
-    window.removeEventListener("click", videoPlayer);
+  switch (musicAudio.value.paused) {
+    case true:
+      musicAudio.value.play();
+      musicAfterPic.value = false;
+      break;
+    case false:
+      musicAudio.value.pause();
+      musicAfterPic.value = true;
   }
+  // if (musicAudio.value.paused === true) {
+  //   console.log("触发了音乐播放");
+  //   musicAudio.value.play();
+  // } else {
+  //   musicAudio.value.pause();
+  //   window.removeEventListener("click", videoPlayer);
+  // }
 };
-const suspendMusic = () => {
-  if (musicAudio.value.paused === true) return;
-  musicAudio.value.pause();
-};
+// 暂停音乐方法
+// const suspendMusic = () => {
+//   if (musicAudio.value.paused === true) {
+//     console.log("3" + musicAudio.value.currentTime);
+//   } else {
+//     console.log("触发了音乐暂停");
+//     musicAudio.value.pause();
+//   }
+// };
 </script>
 
 <style lang="less" scoped>
@@ -91,7 +109,7 @@ const suspendMusic = () => {
   height: 90px;
   border-radius: 50%;
   position: absolute;
-  background-image: url("/src/assets/suspend.png");
+  background-image: var(--background-image-suspend);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 40%;
@@ -103,8 +121,6 @@ const suspendMusic = () => {
   -webkit-box-shadow: rgba(14, 14, 14, 0.19) 0 6px 15px 0;
   -webkit-border-radius: 50%;
   color: rgba(128, 128, 128, 0.8);
-  //  开启点击事件
-  pointer-events: auto;
 }
 
 .music-disk-picture {
@@ -114,8 +130,8 @@ const suspendMusic = () => {
   /*设置图片不可点击*/
   pointer-events: none;
   transform: rotate(360edg);
-  transform-origin: center;
   animation: musicPicRotating 5s linear infinite;
+  transform-origin: center;
   box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
     rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
