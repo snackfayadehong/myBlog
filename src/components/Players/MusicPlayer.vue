@@ -1,7 +1,7 @@
 <template>
   <!--音乐播放器-->
   <div class="music-container" :style="musicAfterPic ? { '--background-image-suspend': 'url(/src/assets/play.png)' } : ''">
-    <div class="music-disk">
+    <div class="music-disk" @click="musicPlayer">
       <!--唱片图片-->
       <img class="music-disk-picture" src="src/assets/musicPic.png" alt="" v-if="defaultPic" />
       <img class="music-disk-picture" :src="music.musicPic" alt="" v-else />
@@ -12,7 +12,7 @@
 <!--animation: musicPicRotating 5s linear infinite;-->
 <script>
 export default {
-  name: "MusicPlayer",
+  name: "MusicPlayer"
 };
 </script>
 <script setup>
@@ -22,7 +22,6 @@ import { getMusic } from "../../api/api.js";
 const defaultPic = ref(true);
 const musicAfterPic = ref(false);
 const musicAudio = ref(null);
-const musicPicRota = ref(null);
 
 // mounted
 const lister = onMounted(() => {
@@ -40,8 +39,15 @@ onMounted(async () => {
     music.value = res;
   }
 });
-// 播放音乐方法
+// 全局播放音乐方法
 const videoPlayer = () => {
+  if (musicAudio.value.paused === true) {
+    musicAudio.value.play();
+    window.removeEventListener("click", videoPlayer);
+  }
+};
+// 暂停音乐方法
+const musicPlayer = () => {
   switch (musicAudio.value.paused) {
     case true:
       musicAudio.value.play();
@@ -51,23 +57,7 @@ const videoPlayer = () => {
       musicAudio.value.pause();
       musicAfterPic.value = true;
   }
-  // if (musicAudio.value.paused === true) {
-  //   console.log("触发了音乐播放");
-  //   musicAudio.value.play();
-  // } else {
-  //   musicAudio.value.pause();
-  //   window.removeEventListener("click", videoPlayer);
-  // }
 };
-// 暂停音乐方法
-// const suspendMusic = () => {
-//   if (musicAudio.value.paused === true) {
-//     console.log("3" + musicAudio.value.currentTime);
-//   } else {
-//     console.log("触发了音乐暂停");
-//     musicAudio.value.pause();
-//   }
-// };
 </script>
 
 <style lang="less" scoped>
