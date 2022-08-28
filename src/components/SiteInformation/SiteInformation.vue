@@ -35,19 +35,19 @@
         <div class="title">
           <div class="Access">
             <span>访客数:</span>
-            <span>1000&nbsp;人</span>
+            <span>{{ siteInfo.traffic }}&nbsp;人</span>
           </div>
           <div class="traffic">
             <span>访问量:</span>
-            <span>10000&nbsp;次</span>
+            <span>{{ siteInfo.visitors }}&nbsp;次</span>
           </div>
           <div class="runtime">
             <span>运行时间:</span>
-            <span>1000&nbsp;天</span>
+            <span>{{ siteInfo.elapsedTime }}&nbsp;天</span>
           </div>
         </div>
         <div class="bottom">
-          <time class="time">2022</time>
+          <time class="time">{{ time }}</time>
         </div>
       </div>
     </el-card>
@@ -56,11 +56,32 @@
 
 <script>
 export default {
-  name: "SiteInformation",
+  name: "SiteInformation"
 };
 </script>
 <script setup>
 import { LocationInformation } from "@element-plus/icons";
+import dayjs from "dayjs";
+import { getSiteInfo } from "../../api/api.js";
+import { ref, onMounted } from "vue";
+
+//当前时间
+const time = ref(null);
+
+const siteInfo = ref({});
+onMounted(async () => {
+  const { data: res } = await getSiteInfo();
+  if (!res) {
+    console.log("请求站点信息失败");
+  } else {
+    siteInfo.value = res[0];
+  }
+});
+const nowTime = onMounted(() => {
+  setInterval(function () {
+    time.value = dayjs(`${new Date()}`).format("YYYY-MM-DD HH:mm:ss");
+  }, 1000);
+});
 </script>
 
 <style lang="less" scoped>
