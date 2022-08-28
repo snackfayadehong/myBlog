@@ -1,12 +1,16 @@
 /**
  * 接口路由
- * @author fayadehong
+ * @author Ea
  */
 
 const routes = [
   {
     path: "/music/get",
     handler: require("./service/getMusic").randomMusic
+  },
+  {
+    path: "/siteInformation",
+    handler: require("./service/getSiteInfo").siteInfoHandler
   }
 ];
 
