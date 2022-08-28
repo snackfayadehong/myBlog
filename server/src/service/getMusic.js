@@ -10,6 +10,7 @@ let id = 0; //音乐id
  * @param req
  * @param res
  * @returns {Promise<{Status, author, name, url}>}
+ * @author Ea
  */
 async function randomMusic(event, req, res) {
   const { music } = event;
@@ -27,13 +28,13 @@ async function randomMusic(event, req, res) {
       name: musicID[0].name,
       author: musicID[0].ar[0].name,
       musicPic: musicID[0].al.picUrl,
-      url: url.url,
+      url: url.url
     };
   }
 }
 
 module.exports = {
-  randomMusic,
+  randomMusic
 };
 // randomMusic().then(r => {
 //   console.log(r);

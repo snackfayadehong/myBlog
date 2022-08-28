@@ -2,6 +2,7 @@
  *
  * 错误代码
  *  @type {number}
+ *  @author Ea
  */
 
 // 请求参数错误
