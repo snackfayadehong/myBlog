@@ -6,16 +6,16 @@
 const routes = [
   {
     path: "/music/get",
-    handler: require("./controller/musicController").randomMusicApi,
+    handler: require("./controller/musicController").randomMusicApi
   },
   {
     path: "/siteInformation",
-    handler: require("./controller/siteinfoController").getSiteInfoApi,
+    handler: require("./controller/siteinfoController").getSiteInfoApi
   },
   {
     path: "/add/accessToData",
-    handler: require("./controller/addAccessController").addAccessToData,
-  },
+    handler: require("./controller/addAccessController").addAccessToData
+  }
 ];
 
 module.exports = routes;
