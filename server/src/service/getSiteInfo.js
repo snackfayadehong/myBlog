@@ -5,7 +5,7 @@ const { formatTime, timeStampToDays } = require("../tool/tools");
 /**
  * formatTime YYYYMMDDThhmmssZ 时间格式处理
  * timeStampToDays 转换时间戳并处理为天数
- * @returns {Promise<RowDataPacket[][]|RowDataPacket[]|OkPacket|OkPacket[]|ResultSetHeader>}
+ * @returns {Promise}
  * @author Ea
  */
 async function siteInfoHandler() {
