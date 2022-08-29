@@ -13,8 +13,8 @@ async function getSiteInfoApi() {
   if (!siteInfo) {
     throw new MyError(NOT_FOUND_ERROR_CODE, "未找到信息");
   } else {
-    siteInfo.createTime = formatTime(siteInfo.createTime);
-    siteInfo.elapsedTime = timeStampToDays(formatTime(siteInfo.elapsedTime));
+    siteInfo.createTime = formatTime(siteInfo.createTime); //格式化带T时间
+    siteInfo.elapsedTime = timeStampToDays(formatTime(siteInfo.elapsedTime)); //转换为天数
     return siteInfo;
   }
 }
