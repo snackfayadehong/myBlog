@@ -13,7 +13,7 @@
         </transition>
         <Article></Article>
         <music-player></music-player>
-        <site-information></site-information>
+        <site-information :traffic="siteInfo.traffic" :visitors="siteInfo.visitors" :elapsed-time="siteInfo.elapsedTime"></site-information>
       </div>
     </div>
     <div class="blog-footer">
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: "App",
+  name: "App"
 };
 </script>
 
@@ -40,21 +40,36 @@ import SiteInformation from "./components/SiteInformation/SiteInformation.vue";
 import Footer from "./components/Footer/Footer.vue";
 import BackToTop from "./components/BackToTop/BackToTop.vue";
 import MusicPlayer from "./components/Players/MusicPlayer.vue";
+
 import { ref, onMounted, onUnmounted } from "vue";
 import { addAccessData } from "./api/api.js";
+import { getSiteInfo } from "./api/api.js";
 
 const showNav = ref(false); // 展示顶部导航栏
 const showBackToTop = ref(false); // 展示回到顶部按钮
 const scrollTopValue = ref(0); //  页面距离顶部距离
 //mounted
+// 点击时间监听
 const listener = onMounted(() => {
   window.addEventListener("scroll", scrollTop);
 });
+// 添加访问量
 const addAccess = onMounted(async () => {
   await addAccessData();
 });
+// 获取站点信息
+const siteInfo = ref({});
+onMounted(async () => {
+  const { data: res } = await getSiteInfo();
+  if (!res) {
+    console.log("请求站点信息失败");
+  } else {
+    siteInfo.value = res;
+  }
+});
 
 //unmounted
+//移除点击时间
 const removeListener = onUnmounted(() => {
   window.removeEventListener("scroll", scrollTop);
 });
@@ -66,7 +81,7 @@ const scrollTop = () => {
 };
 
 // 回到顶部方法
-const scrollTopHandler = (e) => {
+const scrollTopHandler = e => {
   scrollTopValue.value = e;
   if (scrollTopValue.value === 0) {
     const timer = setInterval(() => {

@@ -35,15 +35,15 @@
         <div class="title">
           <div class="Access">
             <span>访客量:</span>
-            <span>{{ siteInfo.traffic }}&nbsp;次</span>
+            <span>{{ traffic }}&nbsp;次</span>
           </div>
           <div class="traffic">
             <span>访问人数:</span>
-            <span>{{ siteInfo.visitors }}&nbsp;人</span>
+            <span>{{ visitors }}&nbsp;人</span>
           </div>
           <div class="runtime">
             <span>运行时间:</span>
-            <span>{{ siteInfo.elapsedTime }}&nbsp;天</span>
+            <span>{{ elapsedTime }}&nbsp;天</span>
           </div>
         </div>
         <div class="bottom">
@@ -56,27 +56,38 @@
 
 <script>
 export default {
-  name: "SiteInformation",
+  name: "SiteInformation"
 };
 </script>
 <script setup>
 import { LocationInformation } from "@element-plus/icons";
 import dayjs from "dayjs";
-import { getSiteInfo } from "../../api/api.js";
 import { ref, onMounted } from "vue";
 
 //当前时间
 const time = ref(null);
-
-const siteInfo = ref({});
-onMounted(async () => {
-  const { data: res } = await getSiteInfo();
-  if (!res) {
-    console.log("请求站点信息失败");
-  } else {
-    siteInfo.value = res;
+//props
+const props = defineProps({
+  // 访问量
+  traffic: {
+    type: Number,
+    required: true,
+    default: ""
+  },
+  //  访问人数
+  visitors: {
+    type: Number,
+    required: true,
+    default: ""
+  },
+  elapsedTime: {
+    type: [Number, String],
+    required: true,
+    default: ""
   }
 });
+
+// 当前时间
 const nowTime = onMounted(() => {
   setInterval(function () {
     time.value = dayjs(`${new Date()}`).format("YYYY-MM-DD HH:mm:ss");
