@@ -56,7 +56,7 @@
 
 <script>
 export default {
-  name: "SiteInformation"
+  name: "SiteInformation",
 };
 </script>
 <script setup>
@@ -74,7 +74,7 @@ onMounted(async () => {
   if (!res) {
     console.log("请求站点信息失败");
   } else {
-    siteInfo.value = res[0];
+    siteInfo.value = res;
   }
 });
 const nowTime = onMounted(() => {
