@@ -4,10 +4,10 @@ const { cloudsearch, song_url } = require("NeteaseCloudMusicApi");
  *
  * @param keywords 关键词
  * @param limit  分页大小
- * @author fayadehong
+ * @author Ea
  */
 // 获取音乐
-async function searchMusic(keywords, limit = 1) {
+async function searchMusic(keywords, limit) {
   if (!keywords) return [];
   try {
     const music = await cloudsearch({
@@ -18,7 +18,7 @@ async function searchMusic(keywords, limit = 1) {
     if (music.status !== 200) {
       return [];
     } else {
-      return music.body.result;
+      return music.body.result.songs;
     }
   } catch (error) {
     console.log(error);
@@ -26,7 +26,7 @@ async function searchMusic(keywords, limit = 1) {
 }
 
 //获取音乐url
-async function getMusicUrl(id, br = 999000) {
+async function getMusicUrl(id, br) {
   if (!id) return "";
   try {
     const musicUrl = await song_url({
@@ -36,7 +36,7 @@ async function getMusicUrl(id, br = 999000) {
     if (musicUrl.status !== 200) {
       return "";
     } else {
-      return musicUrl.body.data[0];
+      return musicUrl.body.data;
     }
   } catch (error) {
     console.log(error);

@@ -34,12 +34,12 @@
         </span>
         <div class="title">
           <div class="Access">
-            <span>访客数:</span>
-            <span>{{ siteInfo.traffic }}&nbsp;人</span>
+            <span>访客量:</span>
+            <span>{{ siteInfo.traffic }}&nbsp;次</span>
           </div>
           <div class="traffic">
-            <span>访问量:</span>
-            <span>{{ siteInfo.visitors }}&nbsp;次</span>
+            <span>访问人数:</span>
+            <span>{{ siteInfo.visitors }}&nbsp;人</span>
           </div>
           <div class="runtime">
             <span>运行时间:</span>
@@ -56,7 +56,7 @@
 
 <script>
 export default {
-  name: "SiteInformation"
+  name: "SiteInformation",
 };
 </script>
 <script setup>
@@ -74,7 +74,7 @@ onMounted(async () => {
   if (!res) {
     console.log("请求站点信息失败");
   } else {
-    siteInfo.value = res[0];
+    siteInfo.value = res;
   }
 });
 const nowTime = onMounted(() => {

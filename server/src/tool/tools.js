@@ -28,5 +28,5 @@ function timeStampToDays(times) {
 
 module.exports = {
   formatTime,
-  timeStampToDays
+  timeStampToDays,
 };
