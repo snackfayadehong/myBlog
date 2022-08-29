@@ -12,6 +12,10 @@ const routes = [
     path: "/siteInformation",
     handler: require("./controller/siteinfoController").getSiteInfoApi,
   },
+  {
+    path: "/add/accessToData",
+    handler: require("./controller/addAccessController").addAccessToData,
+  },
 ];
 
 module.exports = routes;
