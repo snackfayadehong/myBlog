@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
 };
 </script>
 
@@ -41,6 +41,7 @@ import Footer from "./components/Footer/Footer.vue";
 import BackToTop from "./components/BackToTop/BackToTop.vue";
 import MusicPlayer from "./components/Players/MusicPlayer.vue";
 import { ref, onMounted, onUnmounted } from "vue";
+import { addAccessData } from "./api/api.js";
 
 const showNav = ref(false); // 展示顶部导航栏
 const showBackToTop = ref(false); // 展示回到顶部按钮
@@ -48,6 +49,9 @@ const scrollTopValue = ref(0); //  页面距离顶部距离
 //mounted
 const listener = onMounted(() => {
   window.addEventListener("scroll", scrollTop);
+});
+const addAccess = onMounted(async () => {
+  await addAccessData();
 });
 
 //unmounted
@@ -62,7 +66,7 @@ const scrollTop = () => {
 };
 
 // 回到顶部方法
-const scrollTopHandler = e => {
+const scrollTopHandler = (e) => {
   scrollTopValue.value = e;
   if (scrollTopValue.value === 0) {
     const timer = setInterval(() => {
