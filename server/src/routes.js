@@ -15,6 +15,10 @@ const routes = [
   {
     path: "/add/accessToData",
     handler: require("./controller/addAccessController").addAccessToData
+  },
+  {
+    path: "/add/address",
+    handler: require("./controller/ipAddressController").addAddress
   }
 ];
 
