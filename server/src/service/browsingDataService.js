@@ -10,7 +10,7 @@ async function nowTraffic() {
   return db
     .promise()
     .query("select traffic from SiteInformation where id = 1")
-    .catch((e) => {
+    .catch(e => {
       throw new MyError(SYSTEM_ERROR_CODE, e);
     });
 }
@@ -28,7 +28,7 @@ async function increaseTraffic(count) {
     return db
       .promise()
       .query(`update Siteinformation set traffic = ${count}`)
-      .catch((e) => {
+      .catch(e => {
         throw new MyError(SYSTEM_ERROR_CODE, e);
       });
   }
@@ -36,5 +36,5 @@ async function increaseTraffic(count) {
 
 module.exports = {
   nowTraffic,
-  increaseTraffic,
+  increaseTraffic
 };
