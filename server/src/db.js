@@ -15,14 +15,14 @@ const db = mysql.createPool({
 });
 
 // 测试连接
-// db.promise()
-//   .query("select 1 ")
-//   .then(([rows, fields]) => {
-//     console.log("Mysql client connected");
-//   })
-//   .catch(err => {
-//     console.error("Unable connect to Mysql", err);
-//   })
-//   .then(() => db.end());
+/*db.promise()
+  .query("select 1 ")
+  .then(([rows, fields]) => {
+    console.log("Mysql client connected");
+  })
+  .catch(err => {
+    console.error("Unable connect to Mysql", err);
+  })
+  .then(() => db.end());*/
 
 module.exports = db;
