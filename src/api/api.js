@@ -28,3 +28,11 @@ export const getSiteInfo = async () => {
 export const addAccessData = async () => {
   return await myAxios.post("/add/accessToData");
 };
+
+/**
+ * 写入ip地址
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const addAddress = async () => {
+  return await myAxios.post("/add/address");
+};
