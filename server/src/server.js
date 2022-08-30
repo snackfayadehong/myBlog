@@ -7,7 +7,6 @@ const http = require("http");
 const MyError = require("./exception");
 const { BAN_ERROR_CODE } = require("./exception/errorCode");
 const { getRealIp } = require("./tool/realIp");
-const { addAddress } = require("./controller/ipAddressController");
 
 // 请求大小限制
 const requestLimit = "5120kb";
@@ -50,8 +49,6 @@ class ExpressServer {
       const requestRealIp = getRealIp(req);
       if (!requestRealIp) {
         return BAN_ERROR_CODE;
-      } else {
-        await addAddress(requestRealIp);
       }
       const event = req.body;
       let result;
