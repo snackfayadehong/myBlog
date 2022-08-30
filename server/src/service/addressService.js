@@ -27,13 +27,10 @@ async function searchIp(ip) {
  * @author Ea
  */
 async function addIpAddress(address) {
-  console.log(address);
   if (address) {
-    db.promise()
+    return db
+      .promise()
       .query(`INSERT INTO  addressinformation (ipAddress) VALUES ('${address}')`)
-      .then(([rows]) => {
-        console.log(rows);
-      })
       .catch(e => {
         throw new MyError(SYSTEM_ERROR_CODE, e);
       });
