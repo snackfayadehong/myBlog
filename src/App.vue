@@ -44,6 +44,7 @@ import MusicPlayer from "./components/Players/MusicPlayer.vue";
 import { ref, onMounted, onUnmounted } from "vue";
 import { addAccessData } from "./api/api.js";
 import { getSiteInfo } from "./api/api.js";
+import { addAddress } from "./api/api.js";
 
 const showNav = ref(false); // 展示顶部导航栏
 const showBackToTop = ref(false); // 展示回到顶部按钮
@@ -56,6 +57,10 @@ const listener = onMounted(() => {
 // 添加访问量
 const addAccess = onMounted(async () => {
   await addAccessData();
+});
+//添加ip地址
+const address = onMounted(async () => {
+  await addAddress();
 });
 // 获取站点信息
 const siteInfo = ref({});
