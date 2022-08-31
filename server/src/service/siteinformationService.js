@@ -10,11 +10,11 @@ const { NOT_FOUND_ERROR_CODE } = require("../exception/errorCode");
 async function siteInfoHandler() {
   const res = await db
     .promise()
-    .query("select * from SiteInformation where id = 1")
+    .query("select * from MY_siteinfo where id = 1")
     .then(([rows]) => {
       return rows;
     })
-    .catch((e) => {
+    .catch(e => {
       throw new MyError(NOT_FOUND_ERROR_CODE, e);
     });
   if (res.length < 1) {
