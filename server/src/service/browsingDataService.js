@@ -9,7 +9,7 @@ const { REQUEST_PARAMS_ERROR_CODE, SYSTEM_ERROR_CODE } = require("../exception/e
 async function nowTraffic() {
   return db
     .promise()
-    .query("select traffic from SiteInformation where id = 1")
+    .query("select traffic from MY_siteinfo where id = 1")
     .catch(e => {
       throw new MyError(SYSTEM_ERROR_CODE, e);
     });
@@ -27,7 +27,7 @@ async function increaseTraffic(count) {
   } else {
     return db
       .promise()
-      .query(`update Siteinformation set traffic = ${count}`)
+      .query(`update MY_siteinfo set traffic = ${count}`)
       .catch(e => {
         throw new MyError(SYSTEM_ERROR_CODE, e);
       });
@@ -36,5 +36,5 @@ async function increaseTraffic(count) {
 
 module.exports = {
   nowTraffic,
-  increaseTraffic
+  increaseTraffic,
 };
