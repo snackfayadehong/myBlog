@@ -13,7 +13,7 @@ async function searchIp(ip) {
   } else {
     return db
       .promise()
-      .query(`select ipAddress from addressinformation where ipAddress = '${ip}'`)
+      .query(`select ipAddress from MY_address where ipAddress = '${ip}'`)
       .catch(e => {
         throw new MyError(SYSTEM_ERROR_CODE, e);
       });
@@ -30,14 +30,29 @@ async function addIpAddress(address) {
   if (address) {
     return db
       .promise()
-      .query(`INSERT INTO  addressinformation (ipAddress) VALUES ('${address}')`)
+      .query(`INSERT INTO  MY_address (ipAddress) VALUES ('${address}')`)
       .catch(e => {
         throw new MyError(SYSTEM_ERROR_CODE, e);
       });
   }
 }
 
+/**
+ * 同步站点信息存储过程
+ * @returns {Promise<>}
+ * @author Ea
+ */
+async function upSyncSiteInfo() {
+  return db
+    .promise()
+    .query("CALL up_sync_siteInfo()")
+    .catch(e => {
+      throw new MyError(SYSTEM_ERROR_CODE, e);
+    });
+}
+
 module.exports = {
   searchIp,
-  addIpAddress
+  addIpAddress,
+  upSyncSiteInfo,
 };
