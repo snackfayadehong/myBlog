@@ -1,5 +1,5 @@
 const { getRealIp } = require("../tool/realIp");
-const { searchIp, addIpAddress } = require("../service/addressService");
+const { searchIp, addIpAddress, upSyncSiteInfo } = require("../service/addressService");
 
 /**
  * 写入ip地址信息方法
@@ -11,18 +11,38 @@ const { searchIp, addIpAddress } = require("../service/addressService");
 const addAddress = async (event, req) => {
   const ip = getRealIp(req); //获取请求头信息的ip地址
   const row = await searchIp(ip); // 判断是否在数据库中存在
+  // if (row[0].length !== 0) {
+  //   console.log("ip地址已存在--", ip);
+  // } else if (row[0].length === 0) {
+  //   const res = await addIpAddress(ip); // 不存在写入
+  //   if (res[0].affectedRows !== 1) {
+  //     console.log("写入失败--", ip);
+  //   } else {
+  //     console.log("写入成功--", ip);
+  //     const res = await upSyncSiteInfo();
+  //     if (res[0].affectedRows === 0) {
+  //       console.log("同步站点信息失败,up_sync_siteInfo");
+  //     } else {
+  //       console.log("同步站点信息成功,up_sync_siteInfo");
+  //     }
+  //   }
+  // }
   if (row[0].length !== 0) {
-    console.log("ip地址已存在--", ip);
-  } else if (row[0].length === 0) {
-    const res = await addIpAddress(ip); // 不存在写入
-    if (res[0].affectedRows !== 1) {
+    return console.log("ip地址已存在--", ip);
+  }
+  const res = await addIpAddress(ip); //不存在
+  switch (res[0].affectedRows) {
+    case 0:
       console.log("写入失败--", ip);
-    } else {
+      break;
+    case 1:
       console.log("写入成功--", ip);
-    }
+      const res = await upSyncSiteInfo();
+      console.log(res[0].affectedRows === 1 ? "同步站点信息成功,up_sync_siteInfo" : "同步站点信息失败,up_sync_siteInfo");
+      break;
   }
 };
 
 module.exports = {
-  addAddress
+  addAddress,
 };
