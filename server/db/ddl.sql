@@ -43,7 +43,7 @@ BEGIN
             ) THEN
         UPDATE MY_siteinfo
         SET visitors = cnt,
-            updataTime = CURRENT_TIMESTAMP
+            updateTime = CURRENT_TIMESTAMP
         WHERE
                 id = 1;
 
