@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "Article",
+  name: "Article"
 };
 </script>
 
@@ -34,7 +34,7 @@ export default {
 }
 
 .box-card {
-  width: 800px;
+  width: 100%;
   height: 200px;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -44,5 +44,6 @@ export default {
 }
 .article-container {
   position: relative;
+  width: 70%;
 }
 </style>

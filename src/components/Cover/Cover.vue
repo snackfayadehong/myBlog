@@ -1,6 +1,6 @@
 <template>
   <div class="cover-container">
-<!--    封面内容   -->
+    <!--    封面内容   -->
     <div class="cover-main">
       <h1>Ea</h1>
       <span>不说话，装高手</span>
@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import CoverNav from './CoverNav.vue'
-import ScrollDown from '../ScrollDown/ScrollDown.vue'
+import CoverNav from "./CoverNav.vue";
+import ScrollDown from "../ScrollDown/ScrollDown.vue";
 export default {
   name: "Cover",
-  components:{
+  components: {
     CoverNav,
     ScrollDown
   }
@@ -25,14 +25,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
-.cover-container{
+.cover-container {
   height: 100%;
   width: 100%;
   background-image: url("/src/assets/background.jpg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -40,25 +39,24 @@ export default {
   justify-content: space-evenly;
   align-items: center;
 
-  .cover-main{
-      text-align: center;
-    h1{
+  .cover-main {
+    text-align: center;
+    h1 {
       font-size: 60px;
       color: white;
     }
-    span{
+    span {
       display: block;
       font-size: 20px;
       color: white;
-      padding-bottom: 100px
+      padding-bottom: 100px;
     }
-
   }
 }
-.cover-footer{
+.cover-footer {
   position: absolute;
-  left:0;
-  right:0;
+  left: 0;
+  right: 0;
   top: 90%;
   text-align: center;
 }
