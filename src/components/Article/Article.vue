@@ -14,9 +14,11 @@
 
 <script>
 export default {
-  name: "Article"
+  name: "Article",
 };
 </script>
+
+<script setup></script>
 
 <style lang="less" scoped>
 .card-header {
