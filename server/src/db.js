@@ -1,28 +1,31 @@
-const mysql = require("mysql2");
+const { Sequelize } = require("sequelize");
 const { dbConfig } = require("./config/config");
 
 /**
- * 数据库连接池
- * @type {Pool} 连接池
+ * 数据库实例
+ * @type {Sequelize}
  * @author Ea
  */
-const db = mysql.createPool({
-  host: dbConfig.host,
-  port: dbConfig.port,
+const sequelize = new Sequelize({
+  dialect: "mysql",
+  logging: console.log,
   database: dbConfig.database,
-  user: dbConfig.username,
-  password: dbConfig.password
+  username: dbConfig.username,
+  password: dbConfig.password,
+  port: dbConfig.port,
+  host: dbConfig.host,
+  timezone: "+8:00" //东八时区
 });
 
+//测试连接
 // 测试连接
-/*db.promise()
-  .query("select 1 ")
-  .then(([rows, fields]) => {
-    console.log("Mysql client connected");
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("MySQL client connected");
   })
-  .catch(err => {
-    console.error("Unable connect to Mysql", err);
-  })
-  .then(() => db.end());*/
+  .catch(e => {
+    console.error("Unable to connect to MySQL", e);
+  });
 
-module.exports = db;
+module.exports = sequelize;
