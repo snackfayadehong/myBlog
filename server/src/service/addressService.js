@@ -1,58 +1,69 @@
-const db = require("../db");
+const addressModule = require("../model/my_address");
+const siteInfoModule = require("../model/my_siteinfo");
 const MyError = require("../exception");
 const { SYSTEM_ERROR_CODE, REQUEST_PARAMS_ERROR_CODE } = require("../exception/errorCode");
+
+const values = {
+  ip: ""
+};
+
 /**
  * 查询ip地址是否存在
  * @param ip
  * @returns {Promise<>}
- * @author Ea
  */
 async function searchIp(ip) {
   if (!ip) {
     throw new MyError(REQUEST_PARAMS_ERROR_CODE, "请求参数错误");
   } else {
-    return db
-      .promise()
-      .query(`select ipAddress from MY_address where ipAddress = '${ip}'`)
-      .catch(e => {
-        throw new MyError(SYSTEM_ERROR_CODE, e);
-      });
+    values.ip = ip;
+    return await addressModule.findAll({
+      attributes: ["id"], // 指定查询内容
+      where: { ipAddress: ip }
+    });
   }
 }
 
 /**
  * 写入ip地址
- * @param address
- * @returns {Promise<void>}
+ * @param value
+ * @returns {Promise<>}
  * @author Ea
  */
-async function addIpAddress(address) {
-  if (address) {
-    return db
-      .promise()
-      .query(`INSERT INTO  MY_address (ipAddress) VALUES ('${address}')`)
-      .catch(e => {
-        throw new MyError(SYSTEM_ERROR_CODE, e);
-      });
+async function addIpAddress(value) {
+  if (value) {
+    return await addressModule.create({
+      ipAddress: value
+    });
   }
 }
 
 /**
- * 同步站点信息存储过程
+ * 同步站点信息
  * @returns {Promise<>}
  * @author Ea
  */
 async function upSyncSiteInfo() {
-  return db
-    .promise()
-    .query("CALL up_sync_siteInfo()")
-    .catch(e => {
-      throw new MyError(SYSTEM_ERROR_CODE, e);
-    });
+  const count = await addressModule.count();
+  const siteInfo = await siteInfoModule.findAll({
+    attributes: ["visitors"],
+    where: { id: 1 }
+  });
+  let visitors = siteInfo[0].dataValues.visitors;
+  if (count > visitors) {
+    return await siteInfoModule.update(
+      { visitors: count },
+      {
+        where: {
+          id: 1
+        }
+      }
+    );
+  }
 }
 
 module.exports = {
   searchIp,
   addIpAddress,
-  upSyncSiteInfo,
+  upSyncSiteInfo
 };
