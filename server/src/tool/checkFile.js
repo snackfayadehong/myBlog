@@ -1,5 +1,4 @@
 const chokidar = require("chokidar");
-const fs = require("fs");
 
 const MyError = require("../exception/index");
 const { SYSTEM_ERROR_CODE } = require("../exception/errorCode");
@@ -7,7 +6,7 @@ const { SYSTEM_ERROR_CODE } = require("../exception/errorCode");
 //启用文件夹监听并配置监听器
 const watcher = chokidar.watch("../../docs", {
   ignoreInitial: true, //初始化时不触发add/addDir事件
-  useFsEvents: true, // 使用fsEvent接口
+  useFsEvents: true // 使用fsEvent接口
 });
 
 const pattern = /.md/; //正则匹配.md
