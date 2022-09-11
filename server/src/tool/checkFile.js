@@ -1,8 +1,5 @@
 const chokidar = require("chokidar");
 
-const MyError = require("../exception/index");
-const { SYSTEM_ERROR_CODE } = require("../exception/errorCode");
-
 //启用文件夹监听并配置监听器
 const watcher = chokidar.watch("../../docs", {
   ignoreInitial: true, //初始化时不触发add/addDir事件
