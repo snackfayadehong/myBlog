@@ -8,16 +8,24 @@ const { SYSTEM_ERROR_CODE } = require("../exception/errorCode");
  * @author Ea
  */
 async function addAccessToData() {
-  const [nowCount] = await nowTraffic();
-  if (!nowCount) {
+  const [
+    {
+      dataValues: { traffic }
+    }
+  ] = await nowTraffic();
+  if (!traffic) {
     throw new MyError(SYSTEM_ERROR_CODE);
   } else {
-    let count = nowCount[0].traffic;
+    let count = traffic;
     count++;
-    return await increaseTraffic(count);
+    try {
+      return await increaseTraffic(count);
+    } catch (e) {
+      throw new MyError(SYSTEM_ERROR_CODE, e);
+    }
   }
 }
 
 module.exports = {
-  addAccessToData,
+  addAccessToData
 };

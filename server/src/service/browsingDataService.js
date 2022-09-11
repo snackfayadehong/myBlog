@@ -1,18 +1,21 @@
-const db = require("../db");
+const siteInfoModule = require("../model/my_siteinfo");
 const MyError = require("../exception");
 const { REQUEST_PARAMS_ERROR_CODE, SYSTEM_ERROR_CODE } = require("../exception/errorCode");
 
+const id = 1;
+
 /**
  * 查询截止当前访问量
- * @returns {Promise<void>}
+ * @returns {Promise<>}
+ * @author Ea
  */
 async function nowTraffic() {
-  return db
-    .promise()
-    .query("select traffic from MY_siteinfo where id = 1")
-    .catch(e => {
-      throw new MyError(SYSTEM_ERROR_CODE, e);
-    });
+  return await siteInfoModule.findAll({
+    attributes: ["traffic"],
+    where: {
+      id: id
+    }
+  });
 }
 
 /**
@@ -25,16 +28,22 @@ async function increaseTraffic(count) {
   if (!count || count === nowCount) {
     throw new MyError(REQUEST_PARAMS_ERROR_CODE, "请求参数错误");
   } else {
-    return db
-      .promise()
-      .query(`update MY_siteinfo set traffic = ${count}`)
-      .catch(e => {
-        throw new MyError(SYSTEM_ERROR_CODE, e);
-      });
+    try {
+      await siteInfoModule.update(
+        { traffic: count },
+        {
+          where: {
+            id: id
+          }
+        }
+      );
+    } catch (e) {
+      throw new MyError(SYSTEM_ERROR_CODE, e);
+    }
   }
 }
 
 module.exports = {
   nowTraffic,
-  increaseTraffic,
+  increaseTraffic
 };

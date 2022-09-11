@@ -1,4 +1,4 @@
-const db = require("../db");
+const siteInfoModule = require("../model/my_siteinfo");
 const MyError = require("../exception");
 const { NOT_FOUND_ERROR_CODE } = require("../exception/errorCode");
 
@@ -8,22 +8,16 @@ const { NOT_FOUND_ERROR_CODE } = require("../exception/errorCode");
  * @author Ea
  */
 async function siteInfoHandler() {
-  const res = await db
-    .promise()
-    .query("select * from MY_siteinfo where id = 1")
-    .then(([rows]) => {
-      return rows;
-    })
-    .catch(e => {
-      throw new MyError(NOT_FOUND_ERROR_CODE, e);
-    });
-  if (res.length < 1) {
+  const [{ dataValues }] = await siteInfoModule.findAll({ where: { id: 1 } }).catch(e => {
+    throw new MyError(NOT_FOUND_ERROR_CODE, e);
+  });
+  if (!dataValues) {
     return null;
   } else {
-    return res[0];
+    return dataValues;
   }
 }
 
 module.exports = {
-  siteInfoHandler,
+  siteInfoHandler
 };
