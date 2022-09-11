@@ -20,33 +20,48 @@ CREATE TABLE `MY_address`
     PRIMARY KEY (`id`)
 ) ENGINE = InnODB AUTO_INCREMENT = 1;
 
--- 同步站点信息过程
-DROP procedure if exists `up_sync_siteInfo`;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `up_sync_siteInfo`()
-BEGIN
-    /*
-     存储过程名称:同步MY_siteInfo表信息
-     作者:Ea
-     说明:通过MY_address表记录条目同步MY_siteInfo中traffic字段
-     */
-    DECLARE
-        cnt INT DEFAULT ( 0 );
-    SELECT
-        COUNT( ipAddress ) INTO cnt
-    FROM
-        MY_address;
-    IF
-        (
-                    cnt != 0
-                AND cnt != ""
-                AND cnt IS NOT NULL
-            ) THEN
-        UPDATE MY_siteinfo
-        SET visitors = cnt,
-            updateTime = CURRENT_TIMESTAMP
-        WHERE
-                id = 1;
 
-    END IF;
+-- 文章信息表
 
-END
+CREATE TABLE `my_blog`.MY_articles(
+   `id` int not null AUTO_INCREMENT comment 'ID',
+    `title` char(200)  comment '文章标题',
+    `content` text comment '文章内容',
+    `author` char(50) default 'Ea' comment '作者',
+    `createTime` datetime default CURRENT_TIMESTAMP comment '创建时间',
+    `updateTime` datetime default current_timestamp comment '修改时间',
+    `isDelete` tinyint(1) default 0 comment '是否删除 0未删除 1删除',
+    `status` tinyint(1) default 0 comment  '是否有效 0 有效 1 无效',
+     primary key (id)
+)  ENGINE = INNODB AUTO_INCREMENT = 1
+
+-- -- 同步站点信息过程
+-- DROP procedure if exists `up_sync_siteInfo`;
+-- CREATE DEFINER=`root`@`localhost` PROCEDURE `up_sync_siteInfo`()
+-- BEGIN
+--     /*
+--      存储过程名称:同步MY_siteInfo表信息
+--      作者:Ea
+--      说明:通过MY_address表记录条目同步MY_siteInfo中traffic字段
+--      */
+--     DECLARE
+--         cnt INT DEFAULT ( 0 );
+--     SELECT
+--         COUNT( ipAddress ) INTO cnt
+--     FROM
+--         MY_address;
+--     IF
+--         (
+--                     cnt != 0
+--                 AND cnt != ""
+--                 AND cnt IS NOT NULL
+--             ) THEN
+--         UPDATE MY_siteinfo
+--         SET visitors = cnt,
+--             updateTime = CURRENT_TIMESTAMP
+--         WHERE
+--                 id = 1;
+--
+--     END IF;
+--
+-- END
