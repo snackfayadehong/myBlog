@@ -1,6 +1,11 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../db.js");
 
+/**
+ * 地址信息表模型
+ * @type {ModelCtor<>}
+ * @author Ea
+ */
 const addressModule = sequelize.define(
   "my_address",
   {
