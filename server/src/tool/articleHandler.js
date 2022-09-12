@@ -1,4 +1,4 @@
-const articlesModule = require("../model/my_articles");
+const articlesModule = require('../model/my_articles')
 const fs = require("fs");
 const MyError = require("../exception");
 const { NOT_FOUND_ERROR_CODE } = require("../exception/errorCode");
@@ -9,23 +9,33 @@ const { NOT_FOUND_ERROR_CODE } = require("../exception/errorCode");
  * @author Ea
  */
 function readeArticle(path) {
-  let a = "";
   if (!path) {
     throw new MyError(NOT_FOUND_ERROR_CODE);
   } else {
-    fs.readFile(`${path}`, "utf-8", (err, data) => {
-      if (err) {
-        return "读取文件内容失败";
-      } else {
-        path(data);
-      }
-    });
+    return new Promise( (res,rej)=>{
+      fs.readFile(`${path}`, "utf-8", (err, data) => {
+        if (err) {
+          rej(err)
+        } else {
+          res(data)
+        }
+      });
+    })
   }
 }
 
-function addArticle(path) {
-  const res = readeArticle(path);
-  console.log(res);
+
+let pattern = /^(#).\S.*/;
+
+ function addArticle(path) {
+  readeArticle(path).then(r=>{
+    let res =  r.toString();
+    let title = pattern.exec(res);
+    articlesModule.create()
+  }).catch(e=>{
+    console.log(e)
+  })
+
 }
-addArticle("..\\..\\docs\\test.md");
+addArticle("../../docs/test.md");
 function changeArticle() {}

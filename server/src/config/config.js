@@ -6,7 +6,7 @@ module.exports = {
   dbConfig: {
     database: "my_blog",
     username: "root",
-    password: "fayadehong",
+    password: "root",
     host: "localhost",
     port: 3306
   }
