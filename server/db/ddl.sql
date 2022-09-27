@@ -25,6 +25,7 @@ CREATE TABLE `MY_address`
 
 CREATE TABLE `my_blog`.MY_articles(
    `id` int not null AUTO_INCREMENT comment 'ID',
+   `fileName` char(100) not null comment '文件名'
     `title` char(200)  comment '文章标题',
     `content` text comment '文章内容',
     `author` char(50) default 'Ea' comment '作者',
