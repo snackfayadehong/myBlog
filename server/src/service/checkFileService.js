@@ -1,7 +1,8 @@
 const chokidar = require("chokidar");
+const { addArticle, changeArticle } = require("../tool/articleHandler");
 
 //启用文件夹监听并配置监听器
-const watcher = chokidar.watch("../../docs", {
+const watcher = chokidar.watch("./docs", {
   ignoreInitial: true, //初始化时不触发add/addDir事件
   useFsEvents: true // 使用fsEvent接口
 });
@@ -14,11 +15,11 @@ function patternTest(path) {
 }
 
 //事件处理
-watcher.on("all", (event, path) => {
+/*watcher.on("all", (event, path) => {
   if (patternTest(path)) {
     watcherHandler(event, path);
   }
-});
+});*/
 
 /**
  *
@@ -28,10 +29,23 @@ watcher.on("all", (event, path) => {
 function watcherHandler(e, file) {
   switch (e) {
     case "change":
-      console.log("1" + e, file);
+      try {
+        changeArticle(file);
+      } catch (e) {
+        console.log(e);
+      }
       break;
     case "add":
-      console.log("2" + e, file);
+      try {
+        addArticle(file);
+      } catch (e) {
+        console.log(e);
+      }
       break;
   }
 }
+module.exports = {
+  patternTest,
+  watcherHandler,
+  watcher
+};
