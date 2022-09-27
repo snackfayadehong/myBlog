@@ -1,11 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../db.js");
 
-/**
- * 文章信息表模型
- * @type {ModelCtor<>}
- * @author Ea
- */
 const articlesModule = sequelize.define(
   "my_articles",
   {
@@ -13,6 +8,9 @@ const articlesModule = sequelize.define(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
+    },
+    fileName: {
+      type: DataTypes.CHAR
     },
     title: {
       type: DataTypes.CHAR
