@@ -7,6 +7,7 @@ const http = require("http");
 const MyError = require("./exception");
 const { BAN_ERROR_CODE } = require("./exception/errorCode");
 const { getRealIp } = require("./tool/realIp");
+const { watcher, patternTest, watcherHandler } = require("./service/checkFileService");
 
 // 请求大小限制
 const requestLimit = "5120kb";
@@ -94,6 +95,12 @@ class ExpressServer {
 
   //  监听
   listen(port) {
+    // docs文档监听
+    watcher.on("all", (event, path) => {
+      if (patternTest(path)) {
+        watcherHandler(event, path);
+      }
+    });
     this.server.listen(port);
     let url = `http://127.0.0.1:${port}`;
     if (this.contextPath) {
