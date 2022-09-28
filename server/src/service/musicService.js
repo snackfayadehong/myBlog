@@ -1,3 +1,4 @@
+// 音乐服务
 const { searchMusic, getMusicUrl } = require("../thirdParty/musicsApi");
 
 /**
@@ -32,5 +33,5 @@ async function getSingleMusicUrl(id) {
 
 module.exports = {
   getSingleMusic,
-  getSingleMusicUrl,
+  getSingleMusicUrl
 };
