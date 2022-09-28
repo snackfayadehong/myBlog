@@ -19,6 +19,10 @@ const routes = [
   {
     path: "/add/address",
     handler: require("./controller/ipAddressController").addAddress
+  },
+  {
+    path: "/articles",
+    handler: require("./controller/articlesController").searchArticle
   }
 ];
 
