@@ -1,7 +1,8 @@
+// 地址信息服务
 const addressModule = require("../model/my_address");
 const siteInfoModule = require("../model/my_siteinfo");
 const MyError = require("../exception");
-const { SYSTEM_ERROR_CODE, REQUEST_PARAMS_ERROR_CODE } = require("../exception/errorCode");
+const { REQUEST_PARAMS_ERROR_CODE } = require("../exception/errorCode");
 
 const values = {
   ip: ""
