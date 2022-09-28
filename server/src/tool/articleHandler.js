@@ -4,6 +4,7 @@ const fs = require("fs");
 const MyError = require("../exception");
 const { NOT_FOUND_ERROR_CODE } = require("../exception/errorCode");
 
+// marked基本设置
 marked.setOptions({
   renderer: new marked.Renderer(),
   gfm: true,
@@ -13,7 +14,7 @@ marked.setOptions({
   sanitize: false,
   smartLists: true,
   smartypants: false
-}); //基本设置
+});
 
 /**
  * 读取md文件内容
@@ -51,10 +52,12 @@ async function searchArticle(name) {
 }
 
 let titlePattern = /<h1(([\s\S])*?)<\/h1>/; // 标题
-let fileNamePattern = /(?!.*\/).+/;
+let fileNamePattern = /(?!.*\/).+/; // 文件名称
+let abstractPattern = /<p.*?>(.*?)<\/p>/;
 let articleValue = {
   fileName: "",
   title: "",
+  Abstract: "",
   content: ""
 };
 
@@ -68,19 +71,30 @@ function addArticle(path) {
   readeArticle(path)
     .then(r => {
       let res = marked.parse(r.toString());
-      articleValue.content = res;
-      articleValue.title = titlePattern.exec(res)[0];
-      articleValue.fileName = fileNamePattern.exec(path)[0];
+      // 拆解文章内容
+      try {
+        articleValue.content = res;
+        articleValue.title = titlePattern.exec(res)[0];
+        articleValue.fileName = fileNamePattern.exec(path)[0];
+        if (abstractPattern.exec(res) == null) {
+          articleValue.Abstract = "<p>无摘要</p>";
+        } else {
+          articleValue.Abstract = abstractPattern.exec(res)[0];
+        }
+      } catch (e) {
+        console.log(e);
+      }
       // 写入
       try {
         articlesModule
           .create({
             fileName: articleValue.fileName,
             title: articleValue.title,
+            Abstract: articleValue.Abstract,
             content: articleValue.content
           })
           .then(r => {
-            console.log(r);
+            console.log(r, "处理成功");
           });
       } catch (e) {
         console.log(e);
