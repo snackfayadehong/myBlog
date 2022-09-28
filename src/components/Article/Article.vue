@@ -1,9 +1,9 @@
 <template>
   <div class="article-container">
-    <el-card class="box-card" v-for="item in 5" :key="item" shadow="hover">
+    <el-card class="box-card" v-for="item in articles" :key="item.id" shadow="hover">
       <template #header>
         <div class="card-header">
-          <span>目前没有内容</span>
+          <span v-html="item.title"></span>
           <el-button class="button" text>阅读全文</el-button>
         </div>
       </template>
@@ -14,11 +14,20 @@
 
 <script>
 export default {
-  name: "Article",
+  name: "Article"
 };
 </script>
 
-<script setup></script>
+<script setup>
+const props = defineProps({
+  // 文章信息数组
+  articles: {
+    type: Array,
+    required: true,
+    default: []
+  }
+});
+</script>
 
 <style lang="less" scoped>
 .card-header {

@@ -11,7 +11,7 @@
         <transition name="nav-transition">
           <NavigationBarTop :scroll-top-value="scrollTopValue"></NavigationBarTop>
         </transition>
-        <Article></Article>
+        <Article :articles="articles"></Article>
         <music-player></music-player>
         <site-information :traffic="siteInfo.traffic" :visitors="siteInfo.visitors" :elapsed-time="siteInfo.elapsedTime"></site-information>
       </div>
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: "App",
+  name: "App"
 };
 </script>
 
@@ -45,6 +45,7 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { addAccessData } from "./api/api.js";
 import { getSiteInfo } from "./api/api.js";
 import { addAddress } from "./api/api.js";
+import { getArticles } from "./api/api.js";
 
 const showNav = ref(false); // 展示顶部导航栏
 const showBackToTop = ref(false); // 展示回到顶部按钮
@@ -70,6 +71,14 @@ onMounted(async () => {
     console.log("请求站点信息失败");
   } else {
     siteInfo.value = res;
+  }
+});
+// 获取文章信息
+const articles = ref({});
+onMounted(async () => {
+  const { data: res } = await getArticles();
+  if (res) {
+    articles.value = res;
   }
 });
 
