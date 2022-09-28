@@ -21,6 +21,10 @@ export const getSiteInfo = async () => {
   return await myAxios.post("/siteInformation");
 };
 
+export const getArticles = async () => {
+  return await myAxios.post("/articles");
+};
+
 /**
  * 增加访问量
  * @returns {Promise<AxiosResponse<any>>}
