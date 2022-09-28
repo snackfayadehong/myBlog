@@ -15,6 +15,9 @@ const articlesModule = sequelize.define(
     title: {
       type: DataTypes.CHAR
     },
+    Abstract: {
+      type: DataTypes.TEXT
+    },
     content: {
       type: DataTypes.TEXT
     },
