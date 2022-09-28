@@ -1,3 +1,4 @@
+// docs文件夹变动检测服务
 const chokidar = require("chokidar");
 const { addArticle, changeArticle } = require("../tool/articleHandler");
 
@@ -42,6 +43,8 @@ function watcherHandler(e, file) {
         console.log(e);
       }
       break;
+    default:
+      return;
   }
 }
 module.exports = {
