@@ -1,3 +1,4 @@
+// 站点浏览信息服务
 const siteInfoModule = require("../model/my_siteinfo");
 const MyError = require("../exception");
 const { REQUEST_PARAMS_ERROR_CODE, SYSTEM_ERROR_CODE } = require("../exception/errorCode");
